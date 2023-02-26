@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<!-- <form action="" method="post">{%csrf_token%}
+    {%for i in form%}
+    {{i.label}}
+    {{i}}
+
+
+    {%endfor%}
+
+
+
+    
+<input type="submit" value="submit">
+
+
+</form> -->
+
+
+
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="{%url 'account' %}"><i class="im im-angle-left"></i></a>
+            <br>
+
+            <form class="form" method="POST">{%csrf_token%}
+                <!-- Input:Text -->
+                {%for i in form%}
+                <div class="form__field">
+                    <label for="formInput#text">{{i.label}}</label>
+                    {{i}}
+                </div>
+                {%endfor%}
+
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock body %}

@@ -1,0 +1,5 @@
+django
+pillow
+whitenoise
+djangorestframework
+django-cors-headers ##for making api call to the front end
