@@ -32,7 +32,7 @@ img {
   position: sticky;
   z-index: 111;
   background-color: var(--color-sub);
-  padding: 1.5rem 0;
+  padding: 0.5rem 0;
 }
 
 .header > .container {
@@ -42,7 +42,8 @@ img {
 }
 
 .header__logo > img {
-  height: 3.8rem;
+  height: 6rem;
+  width: 100%;
 }
 
 .header__nav > ul {

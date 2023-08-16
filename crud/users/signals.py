@@ -54,9 +54,11 @@ def updateprofile(sender,instance,created,**kwargs):
 
 # @receiver(post_delete,sender=Profile)
 def deleteprofile(sender,instance,**kwargs):
-    user=instance.user
-    user.delete()
-    
+    try:    
+        user=instance.user
+        user.delete()
+    except:
+        pass
 
 post_save.connect(createprofile,sender=User)
 post_delete.connect(deleteprofile,sender=Profile)

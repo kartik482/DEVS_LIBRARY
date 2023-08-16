@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework.response import Response
 from .serializers import Projectserializer
-from crudapp.models import Project,Review
+from crudapp.models import Project,Review,Tag
 
 
 @api_view(['GET'])
@@ -56,5 +56,14 @@ def projectvote(request,pk):
     project.getvotecount ##getting property decorator from models
     serializer=Projectserializer(project,many=False)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def removeTag(request):
+    tagId=request.data['tag']
+    projectId=request.data['project']
+    project=Project.objects.get(id=projectId)
+    tag=Tag.objects.get(id=tagId)
+    project.tags.remove(tag)
+    return Response('tag is removed')
 
 

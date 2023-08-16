@@ -94,6 +94,7 @@ def createproject(request):
     form=ProjectForm()
 
     if request.method=="POST":
+        newtags=request.POST.get('newtags').replace(',',' ').split()
         # print(request.POST)
         form=ProjectForm(request.POST,request.FILES)
         print(request.POST)
@@ -101,6 +102,9 @@ def createproject(request):
             project=form.save(commit=False)
             project.owner=profile
             project.save()
+            for tag in newtags:
+                tag,created=Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
             
             return redirect("account")
 
@@ -114,12 +118,19 @@ def updateproject(request,pk):
     form=ProjectForm(instance=project)
 
     if request.method=="POST":
+        newtags=request.POST.get('newtags').replace(',',' ').split()
+        # print(newtags)
+        
         form=ProjectForm(request.POST,request.FILES,instance=project)
         if form.is_valid:
-            form.save()
+            project=form.save()
+            for tag in newtags:
+                tag,created=Tag.objects.get_or_create(name=tag)
+                project.tags.add(tag)
+            
             return redirect("account")
 
-    context={"form":form}
+    context={"form":form,'project':project}
 
     return render(request,"crudapp/create-form.html",context)
 

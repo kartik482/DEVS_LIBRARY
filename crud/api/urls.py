@@ -17,4 +17,7 @@ urlpatterns = [
     path('projects/',views.getprojects),
     path('projects/<str:pk>',views.getproject),#get single project
     path('projects/<str:pk>/vote',views.projectvote),#get single project
+    
+    
+    path('remove-tag/',views.removeTag),
 ]
